@@ -237,6 +237,8 @@ public class LibraryService {
                     System.out.println("You have not borrowed a book with the title " + returnname);
                 }
 
+                count2 = 0;
+
             // removing the returned list from the borrowed book list
                 for (Book eachBook : bookList
                         ) {
