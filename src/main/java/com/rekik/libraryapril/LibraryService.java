@@ -16,10 +16,33 @@ public class LibraryService {
     String borrowAnswer = "";
     boolean returnDone = true;
     String returnAnswer = "";
+    String borrowname = "";
+    String returnname = "";
     int count=0;
     int count2 = 0;
 
+
+
+
+    public void testLibrary() {
+        Book testBoook1 = new Book("Book1", "author1", 2015, "ISBN1", true);
+        Book testBoook2 = new Book("Book2", "author2", 2016, "ISBN2", true);
+        Book testBoook3 = new Book("Book3", "author3", 2017, "ISBN3", true);
+        Book testBoook4 = new Book("Book4", "author4", 2018, "ISBN4", true);
+        bookList.add(testBoook1);
+        bookList.add(testBoook2);
+        bookList.add(testBoook3);
+        bookList.add(testBoook4);
+
+        availableBookList.add(testBoook1);
+        availableBookList.add(testBoook2);
+        availableBookList.add(testBoook3);
+        availableBookList.add(testBoook4);
+
+    }
+
     public void showMenu() {
+
         System.out.println("1 : List books\n" +
                 "\n" +
                 "2 : Add a book\n" +
@@ -31,16 +54,17 @@ public class LibraryService {
     }
 
     public void listBooks() {
+
         if (!bookList.isEmpty()) {
             for (Book eachBook : bookList
                     ) {
-                System.out.println(eachBook.getTitle());
-                System.out.println(eachBook.getAuthor());
-                System.out.println(eachBook.getIsbn());
-                System.out.println(eachBook.getYearPub());
-                //System.out.println(eachBook.isBorrowed());
+                System.out.println("Title: "+eachBook.getTitle());
+                System.out.println("Author: "+eachBook.getAuthor());
+                System.out.println("ISBN: "+eachBook.getIsbn());
+                System.out.println("Publication Year: "+eachBook.getYearPub());
                 String status = eachBook.isAvailable() == true ? "Is Available" : "Is Borrowed";
-                System.out.println("Available or borrowed? Status: " + status);
+                System.out.println("Availability Status: " + status);
+                System.out.println("=================================================================");
             }
         } else System.out.println("There are no books available");
     }
@@ -66,7 +90,7 @@ public class LibraryService {
             System.out.println("Is the book available?(answer available/yes or borrowed/no)");
             String borrowed = reader.nextLine();
 
-            if(borrowed.equalsIgnoreCase("available") || borrowed.equalsIgnoreCase("yes")){
+            if(borrowed.equalsIgnoreCase("available") || borrowed.equalsIgnoreCase("yes")  || borrowed.equalsIgnoreCase("y")  ){
                 book.setAvailable(true);
             }else book.setAvailable(false);
 
@@ -97,13 +121,13 @@ public class LibraryService {
                    for (Book eachBook : availableBookList
                            ) {
 
-                       System.out.println(eachBook.getTitle());
-                       System.out.println(eachBook.getAuthor());
-                       System.out.println(eachBook.getIsbn());
-                       System.out.println(eachBook.getYearPub());
-                       //System.out.println(eachBook.isBorrowed());
+                       System.out.println("Title: "+eachBook.getTitle());
+                       System.out.println("Author: "+eachBook.getAuthor());
+                       System.out.println("ISBN: "+eachBook.getIsbn());
+                       System.out.println("Publication Year: "+eachBook.getYearPub());
                        String status = eachBook.isAvailable() == true ? "Is Available" : "Is Borrowed";
-                       System.out.println("Available or borrowed? Status: " + status);
+                       System.out.println("Availability Status: " + status);
+                       System.out.println("=================================================================");
 
 
                    }
@@ -111,50 +135,45 @@ public class LibraryService {
                 if(!availableBookList.isEmpty()) {
 
                    System.out.println("Enter the title of the book you want to borrow?");
-                   String borrowname = reader.nextLine();
+                   borrowname = reader.nextLine();
 
 
-
-                    for (Book eachBook : bookList
+                    for (Book eachBook : availableBookList
                             ) {
 
-                        if (borrowname.equalsIgnoreCase(eachBook.getTitle())) {
+                        if (borrowname.equalsIgnoreCase(eachBook.getTitle()) ) {
+
+
                             eachBook.setAvailable(false);
                             borrowedBookList.add(eachBook);
-                            availableBookList.remove(eachBook);
 
                             count++;
-
-                            //Book toBorrow = new Book();
-                            //toBorrow = eachBook; //in the for each loop
-                            //toBorrow.setAvailability("Borrowed");
-                            //library.set(library.indexOf(toBorrow), toBorrow);
-
-                            //or instead of index
-
-                            //library.remove(toBorrow);
-                            //library.remove(toBorrow);
-
-                            //or
-
-                            //toBorrow.setAvailability("Borrowed");
-
 
                             System.out.println("You have borrowed " + eachBook.getTitle() + " by " + eachBook.getAuthor());
                         }
                     }
+
+                    //removing from the available list
+
+                    for (Book eachBook : bookList
+                            ) {
+
+                        if (borrowname.equalsIgnoreCase(eachBook.getTitle()) ) {
+
+                            availableBookList.remove(eachBook);
+
+                        }
+                    }
+
+
                 }
 
 
                 if(count == 0){
-                    System.out.println("There are no books with that name");
+                    System.out.println("There is no available book called "+ borrowname);
                 }
 
                 count = 0;
-
-
-
-
 
                 if(!availableBookList.isEmpty()) {
 
@@ -184,37 +203,43 @@ public class LibraryService {
             for (Book eachBook : borrowedBookList
                     ) {
 
-                System.out.println(eachBook.getTitle());
-                System.out.println(eachBook.getAuthor());
-                System.out.println(eachBook.getIsbn());
-                System.out.println(eachBook.getYearPub());
+                System.out.println("Title: "+eachBook.getTitle());
+                System.out.println("Author: "+eachBook.getAuthor());
+                System.out.println("ISBN: "+eachBook.getIsbn());
+                System.out.println("Publication Year: "+eachBook.getYearPub());
                 String status = eachBook.isAvailable() == true ? "Is Available" : "Is Borrowed";
-                System.out.println("Available or borrowed? Status: " + status);
+                System.out.println("Availability Status: " + status);
+                System.out.println("=================================================================");
             }
-            // } else System.out.println("You have not borrowed any book");
 
-
-            //if(!borrowedBookList.isEmpty()) {
             System.out.println("Enter the title of the book you want to return?");
-            String returnname = reader.nextLine();
-            for (Book eachBook : bookList
+            returnname = reader.nextLine();
+            for (Book eachBook : borrowedBookList
                     ) {
 
                 if (returnname.equalsIgnoreCase(eachBook.getTitle())) {
                     eachBook.setAvailable(true);
-                    borrowedBookList.remove(eachBook);
                     availableBookList.add(eachBook);
                     System.out.println("You have returned " + eachBook.getTitle() + " by " + eachBook.getAuthor());
                     count2++;
                 }
             }
 
-            if (count2 == 0) {
-                System.out.println("You have not borrowed a book with the title " + returnname);
-            }
+                if (count2 == 0) {
+                    System.out.println("You have not borrowed a book with the title " + returnname);
+                }
+
+            // removing the returned list from the borrowed book list
+                for (Book eachBook : bookList
+                        ) {
+
+                    if (returnname.equalsIgnoreCase(eachBook.getTitle())) {
+                        borrowedBookList.remove(eachBook);
+                    }
+                }
 
 
-                System.out.println("The size of borrowed list "+ borrowedBookList.size());
+                //System.out.println("The size of borrowed list "+ borrowedBookList.size());
 
                 if(!borrowedBookList.isEmpty()) {
 

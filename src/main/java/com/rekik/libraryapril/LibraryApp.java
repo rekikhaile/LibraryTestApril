@@ -11,6 +11,8 @@ public class LibraryApp {
 
         LibraryService libraryService = new LibraryService();
 
+        libraryService.testLibrary();
+
         do {
 
             libraryService.showMenu();
