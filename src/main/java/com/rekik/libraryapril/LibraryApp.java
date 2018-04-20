@@ -11,6 +11,7 @@ public class LibraryApp {
 
         LibraryService libraryService = new LibraryService();
 
+        //load testlibrary data
         libraryService.testLibrary();
 
         do {

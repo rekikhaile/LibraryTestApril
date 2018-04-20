@@ -24,6 +24,7 @@ public class LibraryService {
 
 
 
+    // A method to have a preloaded data of books. They are added to the arraylist of books and available books as they are available.
     public void testLibrary() {
         Book testBoook1 = new Book("Book1", "author1", 2015, "ISBN1", true);
         Book testBoook2 = new Book("Book2", "author2", 2016, "ISBN2", true);
@@ -41,6 +42,8 @@ public class LibraryService {
 
     }
 
+
+    // A method to display menu items
     public void showMenu() {
 
         System.out.println("1 : List books\n" +
@@ -53,6 +56,7 @@ public class LibraryService {
         System.out.println();
     }
 
+    // A method to dispaly all the available books and their information
     public void listBooks() {
 
         if (!bookList.isEmpty()) {
@@ -70,6 +74,7 @@ public class LibraryService {
     }
 
 
+    //A method to add a book information
     public void AddBook() {
 
         do {
@@ -112,6 +117,7 @@ public class LibraryService {
 
 
 
+    // A method that allows to borrow books i.e. change the availability status of the book
     public void borrowBook() {
 
         if(!availableBookList.isEmpty()) {
@@ -153,7 +159,7 @@ public class LibraryService {
                         }
                     }
 
-                    //removing from the available list
+                    //removing from the available list as removing from availableBookList while looping through availableBookList is not allowed
 
                     for (Book eachBook : bookList
                             ) {
@@ -195,6 +201,8 @@ public class LibraryService {
         } else System.out.println("There are no books available to borrow");
     }
 
+
+    // A method that allows to return books i.e. change the availability status of the book
 
     public void returnBook() {
 
